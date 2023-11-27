@@ -3,7 +3,7 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 
 import typeDefs from './schema';
 import resolvers from './resolvers';
-import {AlbumsAPI, AuthorsAPI, CommentsAPI, PostsAPI} from './datasources';
+import {PhotosAPI, AlbumsAPI, AuthorsAPI, CommentsAPI, PostsAPI} from './datasources';
 // import { logger } from './middlewares';
 
 interface SchemaContext {
@@ -12,6 +12,7 @@ interface SchemaContext {
     commentsAPI: CommentsAPI;
     authorsAPI: AuthorsAPI;
     albumsAPI: AlbumsAPI;
+    photosAPI: PhotosAPI;
   };
 }
 
@@ -31,7 +32,8 @@ const standaloneServer = startStandaloneServer(server, {
       postsAPI: new PostsAPI(),
       commentsAPI: new CommentsAPI(),
       authorsAPI: new AuthorsAPI(),
-      albumsAPI: new AlbumsAPI()
+      albumsAPI: new AlbumsAPI(),
+      photosAPI: new PhotosAPI(),
     },
   }),
 });

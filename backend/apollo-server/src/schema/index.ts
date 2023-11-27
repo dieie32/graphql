@@ -33,8 +33,17 @@ export default `#graphql
   }
   
   type Album {
+    userId: ID!
     id: ID!
     title: String
+  }  
+  
+  type Photo {
+    albumId: ID!
+    id: ID!
+    title: String
+    url: String
+    thumbnailUrl: String
   }
 
   type Author {
@@ -66,7 +75,10 @@ export default `#graphql
     authors: [Author]
     authorsByCity(city: City!): [Author]
     albums: [Album]
-    album(id: ID!): Album!
+    album(id: ID!): Album!    
+    photos: [Photo]
+    photo(id: ID!): Photo!
+    photosInAlbum(albumId: ID!): [Photo]
   }
 
   type Mutation {

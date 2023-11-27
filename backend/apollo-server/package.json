@@ -1,0 +1,20 @@
+{
+  "name": "apollo-server",
+  "version": "0.0.1",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start:local": "npx ts-node src/index.ts"
+  },
+  "dependencies": {
+    "@apollo/datasource-rest": "^6.2.1",
+    "@apollo/server": "^4.9.4",
+    "graphql": "^16.8.1",
+    "graphql-subscriptions": "^2.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.8"
+  }
+}

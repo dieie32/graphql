@@ -31,6 +31,11 @@ export default `#graphql
     email: String
     body: String
   }
+  
+  type Album {
+    id: ID!
+    title: String
+  }
 
   type Author {
     id: ID!
@@ -60,6 +65,8 @@ export default `#graphql
     comments: [Comment]
     authors: [Author]
     authorsByCity(city: City!): [Author]
+    albums: [Album]
+    album(id: ID!): Album!
   }
 
   type Mutation {

@@ -35,9 +35,6 @@ export class PostsService {
 
   async create(createPostInput: CreatePostInput): Promise<Post> {
     await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(null);
-      }, 2000);
     });
     return this.postRepository.save(createPostInput);
   }
@@ -51,7 +48,8 @@ export class PostsService {
     const post = await this.postRepository.findOne({ where: { id } });
     await pubSub.publish('postDeleted', { postDeleted: post });
     await this.commentsService.removeAllByPostId(id);
+    await this.postRepository.remove(post);
 
-    return this.postRepository.remove(post);
+    return Promise.resolve({...post, id})
   }
 }

@@ -8,7 +8,10 @@ import {
   deleteComment,
   createAlbum,
   updateAlbum,
-  deleteAlbum
+  deleteAlbum,
+  createPhoto,
+  updatePhoto,
+  deletePhoto
 } from './mutations';
 import {
   posts,
@@ -51,6 +54,9 @@ export default {
     createComment,
     updateComment,
     deleteComment,
+    createPhoto,
+    updatePhoto,
+    deletePhoto
   },
   Subscription: {
     postDeleted: {

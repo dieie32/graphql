@@ -1,5 +1,18 @@
 import { postDeleted } from './subscriptions';
-import { createPost, updatePost, deletePost, createComment, updateComment, deleteComment } from './mutations';
+import {
+  createPost,
+  updatePost,
+  deletePost,
+  createComment,
+  updateComment,
+  deleteComment,
+  createAlbum,
+  updateAlbum,
+  deleteAlbum,
+  createPhoto,
+  updatePhoto,
+  deletePhoto
+} from './mutations';
 import {
   posts,
   postsPaginated,
@@ -35,9 +48,15 @@ export default {
     createPost,
     updatePost,
     deletePost,
+    createAlbum,
+    updateAlbum,
+    deleteAlbum,
     createComment,
     updateComment,
     deleteComment,
+    createPhoto,
+    updatePhoto,
+    deletePhoto
   },
   Subscription: {
     postDeleted: {

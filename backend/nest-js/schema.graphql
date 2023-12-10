@@ -5,6 +5,7 @@
 type Album {
   id: ID!
   title: String!
+  url: String!
 }
 
 type Comment {
@@ -25,6 +26,7 @@ type ConnectionInfo {
 
 input CreateAlbumInput {
   title: String!
+  url: String!
 }
 
 input CreateCommentInput {

@@ -2,8 +2,10 @@ import { Resolver, Query, Args, Int, Mutation, Subscription } from '@nestjs/grap
 
 import { Album } from './entities';
 import { AlbumsService } from './albums.service';
-import { CreateAlbumInput } from './dto';
+import {CreateAlbumInput, UpdateAlbumInput} from './dto';
 import { PubSub } from 'graphql-subscriptions';
+import {Post} from "../posts/entities";
+import {UpdatePostInput} from "../posts/dto";
 
 const pubSub = new PubSub();
 
@@ -24,6 +26,11 @@ export class AlbumsResolver {
   @Mutation(() => Album)
   createAlbum(@Args('createAlbumInput') createAlbumInput: CreateAlbumInput): Promise<Album> {
     return this.albumsService.create(createAlbumInput);
+  }
+
+  @Mutation(() => Album)
+  updateAlbum(@Args('updateAlbumInput') updateAlbumInput: UpdateAlbumInput): Promise<Album> {
+    return this.albumsService.update(updateAlbumInput.id, updateAlbumInput);
   }
 
   @Mutation(() => Album)

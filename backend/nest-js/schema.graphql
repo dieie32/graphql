@@ -52,6 +52,7 @@ type Mutation {
   removeAlbum(id: Int!): Album!
   removeComment(id: Int!): Comment!
   removePost(id: Int!): Post!
+  updateAlbum(updateAlbumInput: UpdateAlbumInput!): Album!
   updateComment(updateCommentInput: UpdateCommentInput!): Comment!
   updatePost(updatePostInput: UpdatePostInput!): Post!
 }
@@ -83,6 +84,12 @@ type Query {
 type Subscription {
   albumDeleted: Album!
   postDeleted: Post!
+}
+
+input UpdateAlbumInput {
+  id: Int!
+  title: String
+  url: String
 }
 
 input UpdateCommentInput {

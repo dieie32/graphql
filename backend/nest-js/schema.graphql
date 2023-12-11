@@ -5,6 +5,7 @@
 type Album {
   id: ID!
   title: String!
+  url: String!
 }
 
 type Comment {
@@ -25,6 +26,7 @@ type ConnectionInfo {
 
 input CreateAlbumInput {
   title: String!
+  url: String!
 }
 
 input CreateCommentInput {
@@ -47,8 +49,10 @@ type Mutation {
   createAlbum(createAlbumInput: CreateAlbumInput!): Album!
   createComment(createCommentInput: CreateCommentInput!, postId: ID!): Comment!
   createPost(createPostInput: CreatePostInput!): Post!
+  removeAlbum(id: Int!): Album!
   removeComment(id: Int!): Comment!
   removePost(id: Int!): Post!
+  updateAlbum(updateAlbumInput: UpdateAlbumInput!): Album!
   updateComment(updateCommentInput: UpdateCommentInput!): Comment!
   updatePost(updatePostInput: UpdatePostInput!): Post!
 }
@@ -78,7 +82,14 @@ type Query {
 }
 
 type Subscription {
+  albumDeleted: Album!
   postDeleted: Post!
+}
+
+input UpdateAlbumInput {
+  id: Int!
+  title: String
+  url: String
 }
 
 input UpdateCommentInput {

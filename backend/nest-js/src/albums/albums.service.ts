@@ -3,7 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Album } from './entities';
-import { CreateAlbumInput } from './dto';
+import { CreateAlbumInput, UpdateAlbumInput } from './dto';
+import { PubSub } from 'graphql-subscriptions';
+
+const pubSub = new PubSub();
 
 @Injectable()
 export class AlbumsService {
@@ -22,5 +25,18 @@ export class AlbumsService {
       resolve(null);
     });
     return this.albumsRepository.save({ ...createAlbumInput });
+  }
+
+  async update(id, updateAlbumInput: UpdateAlbumInput): Promise<Album> {
+    const album = await this.albumsRepository.findOne({ where: { id } });
+    return this.albumsRepository.save({ ...album, ...updateAlbumInput });
+  }
+
+  async remove(id): Promise<Album> {
+    const album = await this.albumsRepository.findOne({ where: { id } });
+    await pubSub.publish('albumDeleted', { albumDeleted: album });
+    await this.albumsRepository.remove(album);
+
+    return { ...album, id };
   }
 }

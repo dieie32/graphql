@@ -11,4 +11,8 @@ export class Album {
   @Field()
   @Column()
   title: string;
+
+  @Field()
+  @Column()
+  url: string;
 }

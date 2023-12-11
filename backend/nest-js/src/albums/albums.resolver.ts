@@ -1,8 +1,11 @@
-import { Resolver, Query, Args, Int, Mutation } from '@nestjs/graphql';
+import { Resolver, Query, Args, Int, Mutation, Subscription } from '@nestjs/graphql';
 
 import { Album } from './entities';
 import { AlbumsService } from './albums.service';
 import { CreateAlbumInput } from './dto';
+import { PubSub } from 'graphql-subscriptions';
+
+const pubSub = new PubSub();
 
 @Resolver(() => Album)
 export class AlbumsResolver {
@@ -21,5 +24,15 @@ export class AlbumsResolver {
   @Mutation(() => Album)
   createAlbum(@Args('createAlbumInput') createAlbumInput: CreateAlbumInput): Promise<Album> {
     return this.albumsService.create(createAlbumInput);
+  }
+
+  @Mutation(() => Album)
+  removeAlbum(@Args('id', { type: () => Int }) id: number): Promise<Album> {
+    return this.albumsService.remove(id);
+  }
+
+  @Subscription(() => Album)
+  albumDeleted() {
+    return pubSub.asyncIterator('albumDeleted');
   }
 }

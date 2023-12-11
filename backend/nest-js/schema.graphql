@@ -49,6 +49,7 @@ type Mutation {
   createAlbum(createAlbumInput: CreateAlbumInput!): Album!
   createComment(createCommentInput: CreateCommentInput!, postId: ID!): Comment!
   createPost(createPostInput: CreatePostInput!): Post!
+  removeAlbum(id: Int!): Album!
   removeComment(id: Int!): Comment!
   removePost(id: Int!): Post!
   updateComment(updateCommentInput: UpdateCommentInput!): Comment!
@@ -80,6 +81,7 @@ type Query {
 }
 
 type Subscription {
+  albumDeleted: Album!
   postDeleted: Post!
 }
 

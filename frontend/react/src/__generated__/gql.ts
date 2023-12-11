@@ -14,6 +14,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  query postsComments {\n    posts {\n      id\n    }\n    comments {\n      id\n    }\n  }\n": types.PostsCommentsDocument,
+    "\n  query albums {\n    albums {\n      id\n      title\n      url\n    }\n  }\n": types.AlbumsDocument,
     "\n  mutation createComment($postId: ID!, $createComment: CreateCommentInput!) {\n    createComment(postId: $postId, createCommentInput: $createComment) {\n      postId\n      id\n      name\n      email\n      body\n      __typename\n    }\n  }\n": types.CreateCommentDocument,
     "\n  query post($id: Int!) {\n    post(id: $id) {\n      id\n      title\n      body\n      comments {\n        name\n        email\n        body\n      }\n    }\n  }\n": types.PostDocument,
     "\n  query posts {\n    posts {\n      id\n      title\n      body\n    }\n  }\n": types.PostsDocument,
@@ -40,6 +41,10 @@ export function gql(source: string): unknown;
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query postsComments {\n    posts {\n      id\n    }\n    comments {\n      id\n    }\n  }\n"): (typeof documents)["\n  query postsComments {\n    posts {\n      id\n    }\n    comments {\n      id\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query albums {\n    albums {\n      id\n      title\n      url\n    }\n  }\n"): (typeof documents)["\n  query albums {\n    albums {\n      id\n      title\n      url\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -18,6 +18,13 @@ export type Scalars = {
   DateTime: { input: any; output: any; }
 };
 
+export type Album = {
+  __typename?: 'Album';
+  id: Scalars['ID']['output'];
+  title: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+};
+
 export type Comment = {
   __typename?: 'Comment';
   body?: Maybe<Scalars['String']['output']>;
@@ -36,6 +43,11 @@ export type ConnectionInfo = {
   total: Scalars['Int']['output'];
 };
 
+export type CreateAlbumInput = {
+  title: Scalars['String']['input'];
+  url: Scalars['String']['input'];
+};
+
 export type CreateCommentInput = {
   body?: InputMaybe<Scalars['String']['input']>;
   email: Scalars['String']['input'];
@@ -49,12 +61,20 @@ export type CreatePostInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createAlbum: Album;
   createComment: Comment;
   createPost: Post;
+  removeAlbum: Album;
   removeComment: Comment;
   removePost: Post;
+  updateAlbum: Album;
   updateComment: Comment;
   updatePost: Post;
+};
+
+
+export type MutationCreateAlbumArgs = {
+  createAlbumInput: CreateAlbumInput;
 };
 
 
@@ -69,6 +89,11 @@ export type MutationCreatePostArgs = {
 };
 
 
+export type MutationRemoveAlbumArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
 export type MutationRemoveCommentArgs = {
   id: Scalars['Int']['input'];
 };
@@ -76,6 +101,11 @@ export type MutationRemoveCommentArgs = {
 
 export type MutationRemovePostArgs = {
   id: Scalars['Int']['input'];
+};
+
+
+export type MutationUpdateAlbumArgs = {
+  updateAlbumInput: UpdateAlbumInput;
 };
 
 
@@ -106,11 +136,18 @@ export type PostConnection = {
 
 export type Query = {
   __typename?: 'Query';
+  album: Album;
+  albums: Array<Album>;
   comment: Comment;
   comments: Array<Comment>;
   post: Post;
   posts: Array<Post>;
   postsPaginated: PostConnection;
+};
+
+
+export type QueryAlbumArgs = {
+  id: Scalars['Int']['input'];
 };
 
 
@@ -131,7 +168,14 @@ export type QueryPostsPaginatedArgs = {
 
 export type Subscription = {
   __typename?: 'Subscription';
+  albumDeleted: Album;
   postDeleted: Post;
+};
+
+export type UpdateAlbumInput = {
+  id: Scalars['Int']['input'];
+  title?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UpdateCommentInput = {
@@ -151,6 +195,11 @@ export type PostsCommentsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type PostsCommentsQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', id: string }>, comments: Array<{ __typename?: 'Comment', id: string }> };
+
+export type AlbumsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AlbumsQuery = { __typename?: 'Query', albums: Array<{ __typename?: 'Album', id: string, title: string, url: string }> };
 
 export type CreateCommentMutationVariables = Exact<{
   postId: Scalars['ID']['input'];
@@ -195,6 +244,7 @@ export type RemovePostMutation = { __typename?: 'Mutation', removePost: { __type
 
 
 export const PostsCommentsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"postsComments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"posts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<PostsCommentsQuery, PostsCommentsQueryVariables>;
+export const AlbumsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"albums"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"albums"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]} as unknown as DocumentNode<AlbumsQuery, AlbumsQueryVariables>;
 export const CreateCommentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createComment"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"postId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"createComment"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateCommentInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createComment"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"postId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"postId"}}},{"kind":"Argument","name":{"kind":"Name","value":"createCommentInput"},"value":{"kind":"Variable","name":{"kind":"Name","value":"createComment"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"postId"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"__typename"}}]}}]}}]} as unknown as DocumentNode<CreateCommentMutation, CreateCommentMutationVariables>;
 export const PostDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"post"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"post"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"body"}}]}}]}}]}}]} as unknown as DocumentNode<PostQuery, PostQueryVariables>;
 export const PostsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"posts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"posts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"body"}}]}}]}}]} as unknown as DocumentNode<PostsQuery, PostsQueryVariables>;

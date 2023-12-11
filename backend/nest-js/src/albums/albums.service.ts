@@ -3,10 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Album } from './entities';
-import {CreateAlbumInput, UpdateAlbumInput} from './dto';
+import { CreateAlbumInput, UpdateAlbumInput } from './dto';
 import { PubSub } from 'graphql-subscriptions';
-import {UpdatePostInput} from "../posts/dto";
-import {Post} from "../posts/entities";
 
 const pubSub = new PubSub();
 

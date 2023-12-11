@@ -5,7 +5,6 @@ import { FormValidationMessages, getFormErrors, trimValue } from 'src/app/@share
 import { Subject, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
 import { AlbumsService } from 'src/app/albums/albums.service';
-import { PaginatorState } from 'primeng/paginator';
 
 @Component({
   selector: 'app-albums',

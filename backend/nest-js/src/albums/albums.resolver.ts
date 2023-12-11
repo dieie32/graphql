@@ -2,10 +2,8 @@ import { Resolver, Query, Args, Int, Mutation, Subscription } from '@nestjs/grap
 
 import { Album } from './entities';
 import { AlbumsService } from './albums.service';
-import {CreateAlbumInput, UpdateAlbumInput} from './dto';
+import { CreateAlbumInput, UpdateAlbumInput } from './dto';
 import { PubSub } from 'graphql-subscriptions';
-import {Post} from "../posts/entities";
-import {UpdatePostInput} from "../posts/dto";
 
 const pubSub = new PubSub();
 

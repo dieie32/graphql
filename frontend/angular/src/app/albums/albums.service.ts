@@ -4,8 +4,8 @@ import { Album, AlbumParams } from 'src/app/albums/models';
 import {Apollo} from "apollo-angular";
 import {ALBUMS} from "./graphql/query-albums";
 import {CREATE_ALBUM} from "./graphql/mutation-create-album";
-import {REMOVE_ALBUM} from "./graphql/mutation-remove-album";
 import {UPDATE_ALBUM} from "./graphql/mutation-update-album";
+import {REMOVE_ALBUM} from "./graphql/mutation-remove-album";
 
 @Injectable({
   providedIn: 'root',

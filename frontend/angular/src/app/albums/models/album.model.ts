@@ -2,6 +2,7 @@ export interface Album {
   id: number;
   title: string;
   url: string;
+  __typename?: "Album",
 }
 
 export interface AlbumParams {

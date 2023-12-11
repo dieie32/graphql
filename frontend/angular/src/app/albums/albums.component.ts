@@ -16,7 +16,6 @@ export class AlbumsComponent implements OnInit, OnDestroy {
   albums!: Album[];
   info!: ConnectionInfo;
   editAlbum!: Album | null;
-  itemsPerPage = 3;
   isShownCreateModal = false;
   isShownEditModal = false;
 
@@ -52,15 +51,10 @@ export class AlbumsComponent implements OnInit, OnDestroy {
     this.queryAlbums();
   }
 
-  queryAlbums(page = 1): void {
-    this.albumsService.queryAlbumsPaginated(page, this.itemsPerPage).subscribe(({ data, info }) => {
-      this.albums = data;
-      this.info = info;
+  queryAlbums(): void {
+    this.albumsService.queryAlbums().subscribe((albums) => {
+      this.albums = albums;
     });
-  }
-
-  onPageChange({ page }: PaginatorState): void {
-    this.queryAlbums(1 + page!);
   }
 
   showDetails(album: Album): void {

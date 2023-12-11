@@ -30,16 +30,6 @@
           </div>
         </p-card>
       </ng-container>
-
-      <div *ngIf="!albums?.length" class="empty-page">There are no albums in the page.</div>
-
-      <div *ngIf="albums?.length" class="pagination">
-        <p-paginator
-          [rows]="itemsPerPage"
-          [totalRecords]="info.total || 0"
-          (onPageChange)="onPageChange($event)"
-        ></p-paginator>
-      </div>
     </div>
   </div>
 </div>

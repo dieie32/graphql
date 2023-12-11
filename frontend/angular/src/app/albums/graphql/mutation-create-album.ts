@@ -1,11 +1,11 @@
 import { gql } from 'apollo-angular';
 
-export const CREATE_POST = gql`
-  mutation createPost($createPost: CreatePostInput!) {
-    createPost(createPostInput: $createPost) {
+export const CREATE_ALBUM = gql`
+  mutation createAlbum($createAlbum: CreateAlbumInput!) {
+    createAlbum(createAlbumInput: $createAlbum) {
       id
       title
-      body
+      url
       __typename
     }
   }

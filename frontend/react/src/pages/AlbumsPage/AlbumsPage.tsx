@@ -1,4 +1,7 @@
+import { gql } from '__generated__';
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
+import { useQuery } from "@apollo/client";
+import { Loader } from 'common/components/Loader';
 import type { PaginationProps } from 'antd';
 import { Button, Card, Layout, Pagination, Typography } from 'antd';
 import { useState } from 'react';
@@ -7,32 +10,20 @@ import { useNavigate } from 'react-router-dom';
 const { Content } = Layout;
 const { Title } = Typography;
 
-type Album = {
-  id: number;
-  title: string;
-  url: string;
-};
-
-const albums: Album[] = [
-  {
-    id: 1,
-    title: 'quidem molestiae enim',
-    url: 'https://via.placeholder.com/150/92c952',
-  },
-  {
-    id: 2,
-    title: 'sunt qui excepturi placeat culpa',
-    url: 'https://via.placeholder.com/150/771796',
-  },
-  {
-    id: 3,
-    title: 'omnis laborum odio',
-    url: 'https://via.placeholder.com/150/24f355',
-  },
-];
+const QUERY_ALBUMS = gql(/* GraphQL */ `
+  query albums {
+    albums {
+      id
+      title
+      url
+    }
+  }
+`);
 
 export default function AlbumsPage() {
   const navigate = useNavigate();
+  const { loading, data } = useQuery(QUERY_ALBUMS);
+  const { albums } = data || {};
   const [currentPage, setCurrentPage] = useState(1);
 
   const navigateToGallery = (albumId: number) => {
@@ -52,7 +43,7 @@ export default function AlbumsPage() {
           Add Album
         </Button>
 
-        {albums.map(({ id, title, url }) => (
+        {albums?.length ? (albums.map(({ id, title, url }) => (
           <Card key={id} title={title} className="w-full mb-10">
             <div className="text-center mb-4">
               <img
@@ -60,7 +51,7 @@ export default function AlbumsPage() {
                 width={200}
                 src={url}
                 alt={title}
-                onClick={() => navigateToGallery(id)}
+                onClick={() => navigateToGallery(Number(id))}
               />
             </div>
 
@@ -74,7 +65,9 @@ export default function AlbumsPage() {
               </div>
             </div>
           </Card>
-        ))}
+        ))) : loading && (
+          <Loader />
+        )}
       </section>
 
       <Pagination className="text-center" current={currentPage} onChange={onChange} total={50} />
